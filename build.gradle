@@ -1,0 +1,66 @@
+ext {
+    zstdjniVer = "1.5.0-5"
+    projectSubstitutions = [:]
+}
+
+buildscript{
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies{
+        classpath "org.elasticsearch.gradle:build-tools:5.6.4"
+    }
+}
+
+
+group = 'org.mhtocs.es.repository.zip'
+version = '5.6.4'
+
+
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'elasticsearch.esplugin'
+
+
+
+licenseFile = rootProject.file('LICENSE.txt')
+noticeFile = rootProject.file('NOTICE.txt')
+
+esplugin{
+    name 'zip-repository'
+    description 'zip repository for snapshot/restore'
+    classname 'org.mhtocs.es.repository.zip.ZipRepositoryPlugin'
+    licenseFile rootProject.file('LICENSE.txt')
+    noticeFile rootProject.file('NOTICE.txt')
+}
+
+
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+dependencies {
+    compile group: 'com.github.luben', name: 'zstd-jni', version: zstdjniVer
+}
+
+
+checkstyleMain.enabled = false
+checkstyleTest.enabled = false
+
+dependencyLicenses.enabled = false
+thirdPartyAudit.enabled = false
+
+
+forbiddenApisTest.enabled = false
+forbiddenApisMain.enabled = false
+licenseHeaders.enabled = false
+test.enabled = false
+integTestRunner.enabled = false
