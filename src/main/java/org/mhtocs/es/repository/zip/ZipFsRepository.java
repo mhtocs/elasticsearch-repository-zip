@@ -3,20 +3,19 @@ package org.mhtocs.es.repository.zip;
 import org.elasticsearch.cluster.metadata.RepositoryMetaData;
 import org.elasticsearch.common.blobstore.BlobPath;
 import org.elasticsearch.common.blobstore.BlobStore;
-import org.elasticsearch.common.blobstore.fs.FsBlobStore;
 import org.elasticsearch.common.settings.Setting;
 import org.elasticsearch.common.unit.ByteSizeValue;
 import org.elasticsearch.common.xcontent.NamedXContentRegistry;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.repositories.RepositoryException;
 import org.elasticsearch.repositories.blobstore.BlobStoreRepository;
-import org.mhtocs.es.repository.zip.blobstore.ZipBlobStore;
+import org.mhtocs.es.repository.zip.blobstore.ZipFsBlobStore;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Function;
 
-public class ZipRepository extends BlobStoreRepository {
+public class ZipFsRepository extends BlobStoreRepository {
 
     public static final String TYPE = "zip";
 
@@ -32,7 +31,7 @@ public class ZipRepository extends BlobStoreRepository {
     public static final Setting<Boolean> REPOSITORIES_COMPRESS_SETTING =
             Setting.boolSetting("repositories.zip.compress", false, Setting.Property.NodeScope);
 
-    private final ZipBlobStore blobStore;
+    private final ZipFsBlobStore blobStore;
 
     private ByteSizeValue chunkSize;
 
@@ -43,8 +42,8 @@ public class ZipRepository extends BlobStoreRepository {
     /**
      * Constructs a shared file system repository.
      */
-    public ZipRepository(RepositoryMetaData metadata, Environment environment,
-                        NamedXContentRegistry namedXContentRegistry) throws IOException {
+    public ZipFsRepository(RepositoryMetaData metadata, Environment environment,
+                           NamedXContentRegistry namedXContentRegistry) throws IOException {
         super(metadata, environment.settings(), namedXContentRegistry);
         String location = REPOSITORIES_LOCATION_SETTING.get(metadata.settings());
         if (location.isEmpty()) {
@@ -62,7 +61,7 @@ public class ZipRepository extends BlobStoreRepository {
             }
         }
 
-        blobStore = new ZipBlobStore(settings, locationFile);
+        blobStore = new ZipFsBlobStore(settings, locationFile);
         if (CHUNK_SIZE_SETTING.exists(metadata.settings())) {
             this.chunkSize = CHUNK_SIZE_SETTING.get(metadata.settings());
         } else if (REPOSITORIES_CHUNK_SIZE_SETTING.exists(settings)) {

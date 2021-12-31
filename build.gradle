@@ -31,9 +31,9 @@ licenseFile = rootProject.file('LICENSE.txt')
 noticeFile = rootProject.file('NOTICE.txt')
 
 esplugin{
-    name 'zip-repository'
-    description 'zip repository for snapshot/restore'
-    classname 'org.mhtocs.es.repository.zip.ZipRepositoryPlugin'
+    name 'zipfs-repository'
+    description 'zipfs repository for snapshot/restore'
+    classname 'org.mhtocs.es.repository.zipfs.ZipFsRepositoryPlugin'
     licenseFile rootProject.file('LICENSE.txt')
     noticeFile rootProject.file('NOTICE.txt')
 }

@@ -9,12 +9,12 @@ import org.elasticsearch.repositories.Repository;
 import java.util.Collections;
 import java.util.Map;
 
-public class ZipRepositoryPlugin extends Plugin implements RepositoryPlugin {
+public class ZipFsRepositoryPlugin extends Plugin implements RepositoryPlugin {
 
 
 
     @Override
     public Map<String, Repository.Factory> getRepositories(Environment env, NamedXContentRegistry namedXContentRegistry) {
-        return Collections.singletonMap(ZipRepository.TYPE, meta -> new ZipRepository(meta, env, namedXContentRegistry));
+        return Collections.singletonMap(ZipFsRepository.TYPE, meta -> new ZipFsRepository(meta, env, namedXContentRegistry));
     }
 }

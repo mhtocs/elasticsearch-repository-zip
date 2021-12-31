@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
-public class ZipBlobContainer implements BlobContainer {
+public class ZipFsBlobContainer implements BlobContainer {
     @Override
     public BlobPath path() {
         return null;
