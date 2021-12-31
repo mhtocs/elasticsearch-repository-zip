@@ -15,4 +15,4 @@ RUN curl -s "https://get.sdkman.io" | bash && \
     source "/home/kayshu/.sdkman/bin/sdkman-init.sh" && \
     sdk install gradle 3.3
 
-WORKDIR /zip-repository
+WORKDIR /zipfs-repository

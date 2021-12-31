@@ -1,1 +1,1 @@
-# elasticsearch-repository-zip
+# elasticsearch-repository-zipfs
